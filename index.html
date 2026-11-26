@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark" style="color-scheme: dark;"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GL Open 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7f4;--card:#fff;--ink:#17211d;--mute:#5d6b64;--line:#dce3dd;--court:#2f6f5e;--onc:#fff;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1714;--card:#17211d;--ink:#e8efe9;--mute:#9fb0a7;--line:#2a3832;--court:#5fb89f;--onc:#0f1714}}
+:root[data-theme="dark"]{--bg:#0f1714;--card:#17211d;--ink:#e8efe9;--mute:#9fb0a7;--line:#2a3832;--court:#5fb89f;--onc:#0f1714}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Archivo,system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:22px 16px 64px}
+h1{font-weight:800;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.1;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:0 0 20px;font-size:.95rem}
+nav{display:flex;gap:8px;margin-bottom:8px}
+nav button{flex:1;padding:12px;border:2px solid var(--court);background:transparent;color:var(--court);font:600 1rem Archivo,system-ui,sans-serif;border-radius:8px;cursor:pointer}
+nav button[aria-pressed=true]{background:var(--court);color:var(--onc)}
+h2{font-size:1.2rem;font-weight:800;margin:30px 0 8px}
+h3{font-size:.95rem;font-weight:600;color:var(--mute);margin:16px 0 6px}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-size:.82rem;font-weight:600;color:var(--mute)}
+.l{text-align:left}
+.rk{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;font-weight:600}
+.rk.q{background:var(--court);color:var(--onc)}
+.note{color:var(--mute);font-size:.85rem;margin:8px 0 0}
+.m{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:8px;margin-bottom:6px}
+.m .r{text-align:right}
+.m .w{font-weight:800}
+.sc{font-variant-numeric:tabular-nums;font-weight:600;min-width:64px;text-align:center;color:var(--mute)}
+.m input{width:52px;padding:8px 4px;font:inherit;text-align:center;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.act{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.cf{flex:1 1 100%;font-size:.88rem;font-weight:600;text-align:left}
+.st{display:flex;align-items:center;justify-content:center;gap:6px;margin:3px 0}
+.st small{width:34px;text-align:right;color:var(--mute)}
+.st[hidden]{display:none}
+.st input{width:46px}
+.btn{padding:8px 14px;border-radius:6px;border:1px solid var(--court);background:var(--court);color:var(--onc);font:600 .9rem Archivo,system-ui,sans-serif;cursor:pointer}
+.btn.g{background:transparent;color:var(--court)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--court);outline-offset:2px}
+.champ{margin:14px 0 0;padding:14px;border-radius:8px;background:var(--court);color:var(--onc)}
+details{margin-top:30px;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--card)}
+summary{font-weight:600;cursor:pointer}
+.nm{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;color:var(--mute);font-size:.9rem}
+.nm input{flex:1;max-width:320px;padding:8px;font:inherit;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+details .btn{margin-top:8px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:.9rem;max-width:90vw}
+.toast:empty{display:none}
+</style>
+<style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style></head>
+<body>
+<main>
+<h1>Turnamen Badminton Ganda</h1>
+<p class="sub">Skor dan klasemen. Halaman ini memuat ulang sendiri saat panitia menyimpan skor.</p>
+<div id="app"></div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script type="application/json" id="state">{"pemula":{"teams":[{"id":"P1","g":"A","n":"Gede & Uus"},{"id":"P2","g":"A","n":"Dani & Taufik"},{"id":"P3","g":"A","n":"Fauzan & Uda"},{"id":"P4","g":"A","n":"Riki & Rama"},{"id":"P5","g":"B","n":"Fadlila & Namira"},{"id":"P6","g":"B","n":"Aldiza & Ridho"},{"id":"P7","g":"B","n":"Iqbal & Hezran"},{"id":"P8","g":"B","n":"Pandu & Bima"}],"s":{"P1|P2":[10,21],"P2|P3":[21,20],"P2|P4":[21,14],"P6|P7":[21,14],"P6|P8":[13,21],"P3|P4":[21,18],"P1|P3":[12,21],"P5|P8":[13,21],"P5|P6":[14,21],"P5|P7":[16,21],"P1|P4":[12,21],"P7|P8":[17,21]}},"amatir":{"teams":[{"id":"M1","g":"A","n":"Jati & Inu"},{"id":"M2","g":"A","n":"Danu & Anjar"},{"id":"M3","g":"A","n":"Coco & Harri"},{"id":"M4","g":"A","n":"Habib & Sulis"},{"id":"M5","g":"A","n":"Purwo & Aan"}],"s":{"M1|M2":[[21,17],[21,14]],"M3|M4":[[21,12],[21,20]],"M2|M3":[[11,21],[12,21]],"M1|M5":[[19,21],[19,21]]}}}</script>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={};try{S=JSON.parse($('#state').textContent)||{}}catch(e){}
+function mk(pre,groups){const teams=[];let n=1;Object.entries(groups).forEach(([g,c])=>{for(let i=0;i<c;i++){teams.push({id:pre+n,g,n:'Pasangan '+n});n++}});return{teams,s:{}}}
+if(!S.pemula)S.pemula=mk('P',{A:4,B:4});
+if(!S.amatir)S.amatir=mk('M',{A:5});
+const CFG={pemula:{name:'Pemula',q:2,sf:[[['A',0],['B',1]],[['B',0],['A',1]]]},amatir:{name:'Amatir',q:3,po:true}};
+let cls=location.hash==='#amatir'?'amatir':'pemula',canEdit=false,art=null;
+const T=(c,id)=>S[c].teams.find(t=>t.id===id);
+const groups=c=>[...new Set(S[c].teams.map(t=>t.g))];
+function pairs(c,g){const ts=S[c].teams.filter(t=>t.g===g),o=[];for(let i=0;i<ts.length;i++)for(let j=i+1;j<ts.length;j++)o.push([ts[i].id,ts[j].id]);return o}
+const key=(a,b)=>a+'|'+b;
+const sets=s=>s?(typeof s[0]==='number'?[s]:s):[];
+function res(s){let a=0,b=0,pa=0,pb=0;sets(s).forEach(([x,y])=>{pa+=x;pb+=y;if(x>y)a++;else if(y>x)b++});return{a,b,pa,pb,w:a!==b?(a>b?0:1):(pa!==pb?(pa>pb?0:1):-1)}}
+const need3=L=>L.length>2||(L.length>1&&res(L.slice(0,2)).a===res(L.slice(0,2)).b);
+function table(c,g){const r={};S[c].teams.filter(t=>t.g===g).forEach(t=>r[t.id]={t,m:0,w:0,l:0,pf:0,pa:0});
+pairs(c,g).forEach(([a,b])=>{const s=S[c].s[key(a,b)];if(!s)return;const x=res(s),A=r[a],B=r[b];A.m++;B.m++;A.pf+=x.pa;A.pa+=x.pb;B.pf+=x.pb;B.pa+=x.pa;if(x.w===0){A.w++;B.l++}else{B.w++;A.l++}});
+return Object.values(r).sort((x,y)=>y.w-x.w||(y.pf-y.pa)-(x.pf-x.pa)||y.pf-x.pf||x.t.n.localeCompare(y.t.n))}
+const done=(c,g)=>pairs(c,g).every(([a,b])=>S[c].s[key(a,b)]);
+const seed=(c,[g,i])=>done(c,g)?table(c,g)[i].t:null;
+const lbl=([g,i])=>'Peringkat '+(i+1)+' Grup '+g;
+const win=(k,a,b)=>{const s=S[cls].s[k];if(!s||!a||!b)return null;const w=res(s).w;return w<0?null:(w===0?a:b)};
+function row(k,a,b,la,lb){
+const sc=S[cls].s[k],na=esc(a?a.n:la),nb=esc(b?b.n:lb),w=sc?res(sc).w:-1,ed=canEdit&&a&&b,ns=cls==='amatir'?3:1,L=sets(sc);
+let h=`<div class="m" data-k="${esc(k)}"><span class="${w===0?'w':''}">${na}</span>`;
+if(ed){h+='<span class="sc">';for(let i=0;i<ns;i++){const p=L[i]||['',''],sl=ns>1?' set '+(i+1):'';h+=`<span class="st"${i===2&&!need3(L)?' hidden':''}>${ns>1?'<small>Set '+(i+1)+'</small>':''}<input type="number" inputmode="numeric" min="0" aria-label="Skor ${na}${sl}" value="${p[0]}"> – <input type="number" inputmode="numeric" min="0" aria-label="Skor ${nb}${sl}" value="${p[1]}"></span>`}h+='</span>'}
+else h+=`<span class="sc">${sc?L.map(p=>p[0]+' – '+p[1]).join('<br>'):'belum main'}</span>`;
+h+=`<span class="r ${w===1?'w':''}">${nb}</span>`;
+if(ed)h+=`<div class="act">${sc?'<button class="btn g" data-a="del">Hapus skor</button>':''}<button class="btn" data-a="save">Simpan skor</button></div>`;
+return h+'</div>'}
+function render(){
+const c=cls,cf=CFG[c];
+let h='<nav>'+Object.keys(CFG).map(k=>`<button data-tab="${k}" aria-pressed="${k===c}">${CFG[k].name}</button>`).join('')+'</nav>';
+h+='<h2>Klasemen</h2>';
+groups(c).forEach(g=>{h+=`<h3>Grup ${g}</h3><div class="wrap"><table><thead><tr><th>#</th><th class="l">Pasangan</th><th>Main</th><th>Menang</th><th>Kalah</th><th>Selisih</th></tr></thead><tbody>`+table(c,g).map((r,i)=>{const d=r.pf-r.pa;return `<tr><td><span class="rk${i<cf.q?' q':''}">${i+1}</span></td><td class="l">${esc(r.t.n)}</td><td>${r.m}</td><td>${r.w}</td><td>${r.l}</td><td>${d>0?'+':''}${d}</td></tr>`}).join('')+'</tbody></table></div>'});
+h+='<p class="note">'+(cf.po?'Kotak berwarna menandai peringkat 1 (langsung ke final) dan peringkat 2–3 (play-off).':'Kotak berwarna menandai posisi yang lolos ke semifinal.')+' Urutan: jumlah menang, selisih poin, lalu total poin.'+(c==='amatir'?' Pertandingan amatir 2 set; jika 1–1, dimainkan set ke-3 untuk menentukan pemenang.':'')+'</p>';
+h+='<h2>Pertandingan grup</h2>';
+groups(c).forEach(g=>{h+=`<h3>Grup ${g}</h3>`+pairs(c,g).map(([a,b])=>row(key(a,b),T(c,a),T(c,b))).join('')});
+let w1,w2;
+if(cf.po){const a=seed(c,['A',1]),b=seed(c,['A',2]);w1=seed(c,['A',0]);w2=win('PO',a,b);
+h+='<h2>Play-off dan final</h2><h3>Play-off (tentatif): peringkat 2 lawan 3</h3>'+row('PO',a,b,lbl(['A',1]),lbl(['A',2]))+'<h3>Final</h3>'+row('F',w1,w2,lbl(['A',0]),'Pemenang play-off')}
+else{const q=cf.sf.map(([x,y])=>[seed(c,x),seed(c,y),lbl(x),lbl(y)]);
+w1=win('SF1',q[0][0],q[0][1]);w2=win('SF2',q[1][0],q[1][1]);
+h+='<h2>Semifinal dan final</h2><h3>Semifinal 1</h3>'+row('SF1',...q[0])+'<h3>Semifinal 2</h3>'+row('SF2',...q[1])+'<h3>Final</h3>'+row('F',w1,w2,'Pemenang semifinal 1','Pemenang semifinal 2')}
+const f=win('F',w1,w2);if(f)h+=`<p class="champ">Juara ${cf.name}: <strong>${esc(f.n)}</strong></p>`;
+if(canEdit)h+='<details><summary>Ubah nama pasangan</summary>'+S[c].teams.map(t=>`<label class="nm">Grup ${t.g}<input data-id="${t.id}" value="${esc(t.n)}"></label>`).join('')+'<button class="btn" data-a="names">Simpan nama</button></details>';
+$('#app').innerHTML=h}
+function toast(t){const e=$('#toast');e.textContent=t;clearTimeout(toast.t);toast.t=setTimeout(()=>{e.textContent=''},4000)}
+async function save(){
+if(!art)return toast('Anda tidak punya izin untuk menyimpan.');
+const c=document.documentElement.cloneNode(true);
+c.querySelector('#app').textContent='';c.querySelector('#toast').textContent='';
+c.querySelector('#state').textContent=JSON.stringify(S).replace(/</g,'\\u003c');
+toast('Menyimpan…');
+try{await art.publish('<!DOCTYPE html>\n'+c.outerHTML)}catch(e){toast('Gagal menyimpan: '+((e&&(e.message||e.code))||'coba lagi.'))}}
+$('#app').addEventListener('click',e=>{
+const t=e.target.closest('button[data-tab]');
+if(t){cls=t.dataset.tab;location.hash=cls;render();return}
+const b=e.target.closest('button[data-a]');if(!b)return;
+const a=b.dataset.a;
+if(a==='names'){document.querySelectorAll('[data-id]').forEach(i=>{const tm=T(cls,i.dataset.id),v=i.value.trim();if(v)tm.n=v});return save()}
+const m=b.closest('.m'),k=m.dataset.k;
+const ac=m.querySelector('.act');
+if(a==='del'){ac.innerHTML='<span class="cf">Hapus skor ini? Klasemen akan ikut berubah.</span><button class="btn g" data-a="no">Batal</button><button class="btn" data-a="del2">Lanjut</button>';return}
+if(a==='del2'){ac.innerHTML='<span class="cf">Konfirmasi terakhir: skor dihapus permanen dan hilang dari halaman semua orang.</span><button class="btn g" data-a="no">Batal</button><button class="btn" data-a="del3">Ya, hapus skor</button>';return}
+if(a==='no')return render();
+if(a==='del3'){delete S[cls].s[k];return save()}
+const v=[...m.querySelectorAll('input')].filter(i=>!i.closest('[hidden]')).map(i=>i.value===''?NaN:+i.value);
+if(v.some(x=>!Number.isInteger(x)||x<0))return toast('Isi semua skor dengan angka bulat 0 atau lebih.');
+const n2=v.length/2,z=[];for(let i=0;i<n2;i++)z.push([v[2*i],v[2*i+1]]);
+const sv=cls==='amatir'?z:z[0];
+if(n2===3&&z[2][0]===z[2][1])return toast('Set 3 tidak boleh seri. Masukkan skor akhir sampai ada pemenang.');
+if(res(sv).w<0)return toast('Hasil seri. Masukkan skor sampai ada pemenang.');
+S[cls].s[k]=sv;save()});
+$('#app').addEventListener('input',e=>{const m=e.target.closest('.m');if(!m||cls!=='amatir')return;const st=m.querySelectorAll('.st');if(st.length<3)return;
+const v=[...st[0].querySelectorAll('input'),...st[1].querySelectorAll('input')].map(i=>i.value===''?NaN:+i.value);
+const ok=v.every(x=>Number.isInteger(x)&&x>=0),show=ok&&((v[0]>v[1])+(v[2]>v[3]))===((v[1]>v[0])+(v[3]>v[2]));
+if(show===st[2].hidden){st[2].hidden=!show;if(!show)st[2].querySelectorAll('input').forEach(i=>{i.value=''})}});
+render();
+(async()=>{try{const u=await claude.use('user');art=await claude.use('artifact');canEdit=!!(u&&art&&u.canEdit());if(canEdit)render()}catch(e){}})();
+})();
+</script>
+
+
+</body></html>
