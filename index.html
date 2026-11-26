@@ -106,9 +106,11 @@ return Object.values(r).sort((x,y)=>y.w-x.w||(y.pf-y.pa)-(x.pf-x.pa)||y.pf-x.pf|
 const done=(c,g)=>pairs(c,g).every(([a,b])=>S[c].s[key(a,b)]);
 const seed=(c,[g,i])=>done(c,g)?table(c,g)[i].t:null;
 const lbl=([g,i])=>'Peringkat '+(i+1)+' Grup '+g;
+const KO=['SF1','SF2','TP','F'],multi=k=>cls==='amatir'||KO.includes(k);
+const lose=(k,a,b)=>{const s=S[cls].s[k];if(!s||!a||!b)return null;const w=res(s).w;return w<0?null:(w===0?b:a)};
 const win=(k,a,b)=>{const s=S[cls].s[k];if(!s||!a||!b)return null;const w=res(s).w;return w<0?null:(w===0?a:b)};
 function row(k,a,b,la,lb){
-const sc=S[cls].s[k],na=esc(a?a.n:la),nb=esc(b?b.n:lb),w=sc?res(sc).w:-1,ed=canEdit&&a&&b,ns=cls==='amatir'?3:1,L=sets(sc);
+const sc=S[cls].s[k],na=esc(a?a.n:la),nb=esc(b?b.n:lb),w=sc?res(sc).w:-1,ed=canEdit&&a&&b,ns=multi(k)?3:1,L=sets(sc);
 let h=`<div class="m" data-k="${esc(k)}"><span class="${w===0?'w':''}">${na}</span>`;
 if(ed){h+='<span class="sc">';for(let i=0;i<ns;i++){const p=L[i]||['',''],sl=ns>1?' set '+(i+1):'';h+=`<span class="st"${i===2&&!need3(L)?' hidden':''}>${ns>1?'<small>Set '+(i+1)+'</small>':''}<input type="number" inputmode="numeric" min="0" aria-label="Skor ${na}${sl}" value="${p[0]}"> – <input type="number" inputmode="numeric" min="0" aria-label="Skor ${nb}${sl}" value="${p[1]}"></span>`}h+='</span>'}
 else h+=`<span class="sc">${sc?L.map(p=>p[0]+' – '+p[1]).join('<br>'):'belum main'}</span>`;
@@ -120,16 +122,18 @@ const c=cls,cf=CFG[c];
 let h='<nav>'+Object.keys(CFG).map(k=>`<button data-tab="${k}" aria-pressed="${k===c}">${CFG[k].name}</button>`).join('')+'</nav>';
 h+='<h2>Klasemen</h2>';
 groups(c).forEach(g=>{h+=`<h3>Grup ${g}</h3><div class="wrap"><table><thead><tr><th>#</th><th class="l">Pasangan</th><th>Main</th><th>Menang</th><th>Kalah</th><th>Selisih</th></tr></thead><tbody>`+table(c,g).map((r,i)=>{const d=r.pf-r.pa;return `<tr><td><span class="rk${i<cf.q?' q':''}">${i+1}</span></td><td class="l">${esc(r.t.n)}</td><td>${r.m}</td><td>${r.w}</td><td>${r.l}</td><td>${d>0?'+':''}${d}</td></tr>`}).join('')+'</tbody></table></div>'});
-h+='<p class="note">'+(cf.po?'Kotak berwarna menandai peringkat 1 (langsung ke final) dan peringkat 2–3 (play-off).':'Kotak berwarna menandai posisi yang lolos ke semifinal.')+' Urutan: jumlah menang, selisih poin, lalu total poin.'+(c==='amatir'?' Pertandingan amatir 2 set; jika 1–1, dimainkan set ke-3 untuk menentukan pemenang.':'')+'</p>';
+h+='<p class="note">'+(cf.po?'Kotak berwarna menandai peringkat 1 (langsung ke final) dan peringkat 2–3 (play-off).':'Kotak berwarna menandai posisi yang lolos ke semifinal.')+' Urutan: jumlah menang, selisih poin, lalu total poin.'+(c==='amatir'?' Pertandingan amatir 2 set; jika 1–1, dimainkan set ke-3 untuk menentukan pemenang.':' Pertandingan grup 1 set. Semifinal, perebutan juara 3, dan final dimainkan 2 set; jika 1–1, dimainkan set ke-3 untuk menentukan pemenang.')+'</p>';
 h+='<h2>Pertandingan grup</h2>';
 groups(c).forEach(g=>{h+=`<h3>Grup ${g}</h3>`+pairs(c,g).map(([a,b])=>row(key(a,b),T(c,a),T(c,b))).join('')});
-let w1,w2;
+let w1,w2,l1,l2;
 if(cf.po){const a=seed(c,['A',1]),b=seed(c,['A',2]);w1=seed(c,['A',0]);w2=win('PO',a,b);
 h+='<h2>Play-off dan final</h2><h3>Play-off (tentatif): peringkat 2 lawan 3</h3>'+row('PO',a,b,lbl(['A',1]),lbl(['A',2]))+'<h3>Final</h3>'+row('F',w1,w2,lbl(['A',0]),'Pemenang play-off')}
 else{const q=cf.sf.map(([x,y])=>[seed(c,x),seed(c,y),lbl(x),lbl(y)]);
 w1=win('SF1',q[0][0],q[0][1]);w2=win('SF2',q[1][0],q[1][1]);
-h+='<h2>Semifinal dan final</h2><h3>Semifinal 1</h3>'+row('SF1',...q[0])+'<h3>Semifinal 2</h3>'+row('SF2',...q[1])+'<h3>Final</h3>'+row('F',w1,w2,'Pemenang semifinal 1','Pemenang semifinal 2')}
+l1=lose('SF1',q[0][0],q[0][1]);l2=lose('SF2',q[1][0],q[1][1]);
+h+='<h2>Semifinal, juara 3, dan final</h2><h3>Semifinal 1</h3>'+row('SF1',...q[0])+'<h3>Semifinal 2</h3>'+row('SF2',...q[1])+'<h3>Perebutan juara 3</h3>'+row('TP',l1,l2,'Kalah semifinal 1','Kalah semifinal 2')+'<h3>Final</h3>'+row('F',w1,w2,'Pemenang semifinal 1','Pemenang semifinal 2')}
 const f=win('F',w1,w2);if(f)h+=`<p class="champ">Juara ${cf.name}: <strong>${esc(f.n)}</strong></p>`;
+const t3=win('TP',l1,l2);if(t3)h+=`<p class="champ">Juara 3 ${cf.name}: <strong>${esc(t3.n)}</strong></p>`;
 if(canEdit)h+='<details><summary>Ubah nama pasangan</summary>'+S[c].teams.map(t=>`<label class="nm">Grup ${t.g}<input data-id="${t.id}" value="${esc(t.n)}"></label>`).join('')+'<button class="btn" data-a="names">Simpan nama</button></details>';
 h+=`<div class="foot"><button class="btn g" data-a="login">${canEdit?'Keluar dari mode panitia':'Mode panitia'}</button>${canEdit&&!USE_DB?'<span class="note">Skor tersimpan di browser ini saja.</span>':''}</div>`;
 $('#app').innerHTML=h}
@@ -187,11 +191,11 @@ if(a==='del3'){delete S[cls].s[k];return save({t:'s',c:cls,k,v:null})}
 const v=[...m.querySelectorAll('input')].filter(i=>!i.closest('[hidden]')).map(i=>i.value===''?NaN:+i.value);
 if(v.some(x=>!Number.isInteger(x)||x<0))return toast('Isi semua skor dengan angka bulat 0 atau lebih.');
 const n2=v.length/2,z=[];for(let i=0;i<n2;i++)z.push([v[2*i],v[2*i+1]]);
-const sv=cls==='amatir'?z:z[0];
+const sv=multi(k)?z:z[0];
 if(n2===3&&z[2][0]===z[2][1])return toast('Set 3 tidak boleh seri. Masukkan skor akhir sampai ada pemenang.');
 if(res(sv).w<0)return toast('Hasil seri. Masukkan skor sampai ada pemenang.');
 S[cls].s[k]=sv;save({t:'s',c:cls,k,v:sv})});
-$('#app').addEventListener('input',e=>{const m=e.target.closest('.m');if(!m||cls!=='amatir')return;const st=m.querySelectorAll('.st');if(st.length<3)return;
+$('#app').addEventListener('input',e=>{const m=e.target.closest('.m');if(!m)return;const st=m.querySelectorAll('.st');if(st.length<3)return;
 const v=[...st[0].querySelectorAll('input'),...st[1].querySelectorAll('input')].map(i=>i.value===''?NaN:+i.value);
 const ok=v.every(x=>Number.isInteger(x)&&x>=0),show=ok&&((v[0]>v[1])+(v[2]>v[3]))===((v[1]>v[0])+(v[3]>v[2]));
 if(show===st[2].hidden){st[2].hidden=!show;if(!show)st[2].querySelectorAll('input').forEach(i=>{i.value=''})}});
